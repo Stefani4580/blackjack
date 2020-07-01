@@ -59,6 +59,30 @@ class PlayerParent {
 
 }
 
+//==================================================================================================
+// Player - has name, wallet, bet and hand. Knows isNaturalBlackJack().
+//==================================================================================================
+class Player extends PlayerParent {
+    constructor (name, wallet, bet, hand) {
+        super(name, hand);
+        this.wallet = wallet;
+        this.bet = bet;
+    }
+
+    isNaturalBlackJack() {
+        if (this.hand.length > 2) {
+            return false;
+        } else {
+            if (this.calculateHand() == 21  && (this.hand[0].name[0] == "a" | this.hand[1].name[0] == "a")) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+}
+
+
 
 // Card - holds name, value and imageFilename for later display of card image
 class Card {
@@ -112,9 +136,15 @@ let hand = [
     new Card("as", 11)
 ]
 
+let blackJackHand = [
+    new Card("jh", 10),
+    new Card("ah", 11)
+]
 
-let player = new PlayerParent("Stefani", hand);
 
+let player = new Player("Stefani", 100, 50, blackJackHand);
+
+console.log (player.isNaturalBlackJack());
 console.log(player.calculateHand());
 console.log(player.isBust());
 console.log((new Card("as", 11)).isAce());
