@@ -3,22 +3,54 @@
 //==================================================================================================
 /* 
 
-class Player {
-    constructor (name, wallet, bet, hand) (
+class PlayerParent {
+    constructor (name, hand){
         this.name = name;
+        this.hand = hand;
+    }
+
+//==================================================================================================
+// calculateHand() - Calculate the players hand by adding the value of each card.  Returns total.
+//==================================================================================================
+
+    calculateHand() {
+        let sum = 0;
+        holdAce = [];
+        for (const card of this.hand){
+            if card.isAce() {
+                holdAce.push() = card;
+            } else {
+                sum += card.getValue();
+            }
+        }
+        // Count an Ace as an 11 as long as it doesn't bust the hand. If there is more than one Ace only one can be 11.
+        for (const ace of holdAce){
+            let tempSum = sum + ace.getValue();
+            if (tempSum >21){
+                sum += 1;
+            }  else {
+                sum += ace.getValue();
+            }
+        }
+        return sum;
+    }
+
+    isBust(){
+        return (this.calculateHand() > 21);
+    }
+}
+
+class Player extends PlayerParent {
+    constructor (name, wallet, bet, hand) (
+        super(name, hand);
         this.wallet = wallet;
         this.bet = bet;
-        this.hand = hand
     )
 
 
 }
 
-class Dealer {
-    constructor (name, hand) (
-        this.name = name;
-        this.hand = hand;
-    )
+class Dealer extends PlayerParent {
 
     deal() {
         deal two cards face up to player
@@ -71,6 +103,31 @@ class Blackjack {
         } 
         console.log(deck);
     }
+
+    startGame(){
+        deal two cards to player
+        deal two cards to dealer
+
+        ask the player hit or stay
+        while hit {
+            deal card to player
+        }
+        
+        Display player hand status
+
+        //Dealer plays
+        while hand < 17 {
+            deal card to dealer
+        }
+
+        Compare hands.
+
+
+
+
+    }
 }
+
+
 
 */
