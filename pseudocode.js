@@ -63,10 +63,14 @@ class Player extends PlayerParent {
 
 class Dealer extends PlayerParent {
 
-    deal() {
+    startHand() {
         deal two cards face up to player
         deal one card face down to dealer
         deal one card face up to dealer
+    }
+
+    deal(){
+        Blackjack.
     }
 
     // Make sure an instance and be an argument to its own method
@@ -112,7 +116,13 @@ class Blackjack {
                 deck.set(card.name, card);
             }                
         } 
-        console.log(deck);
+    }
+
+    nextCard(){
+        let index = returnRandomNumber(0, 51);
+        let nextCard = this.deck.get(index);
+        this.deck.remove(nextCard);
+        return nextCard;
     }
 
     startGame(){
