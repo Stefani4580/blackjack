@@ -180,20 +180,16 @@ class Blackjack {
     }
 
     startGame(){
-
-
-        this.dealer.startHand(this.player);
-
-    
-
         let playAgain = true;
         while (playAgain) {
-
+        console.log("==== Start round by dealing 2 cards to player and dealer ====");
             this.dealer.startHand(this.player);
             
             // let hitOrStay = prompt("Would you like to hit or stay?","h/s");
+            console.log("==== Player says hit ====");
             let hitOrStay = "h";
             while (hitOrStay == "h"){
+                console.log(`==== Hit Player at ${this.player.calculateHand()} ====`);
                 this.dealer.hit(this.player);
                 // hitOrStay = prompt("Would you like to hit or stay?","h/s");
                 hitOrStay = "s";
@@ -204,8 +200,10 @@ class Blackjack {
             if (this.player.isBust()){
                 console.log("Player has busted with ", this.player.calculateHand());
             }
-            
+            console.log("==== Dealer's turn ====");
+
             while (this.dealer.calculateHand() < 17) {
+                console.log(`==== Hit Dealer at ${this.dealer.calculateHand()} ====`);
                 this.dealer.hit(this.dealer);
             }
             console.log("Dealer hand:  ", this.dealer.calculateHand());
@@ -240,25 +238,3 @@ class Blackjack {
 
 const blackjack = new Blackjack();
 blackjack.startGame();
-
-let hand = [
-    new Card("2c", 2),
-    new Card("jh", 10),
-    new Card("6s", 6),
-    new Card("ah", 11),
-    new Card("ac", 11),
-    new Card("as", 11)
-]
-
-let blackJackHand = [
-    new Card("jh", 10),
-    new Card("ah", 11)
-]
-
-
-let player = new Player("Stefani", 100, 50, blackJackHand);
-
-console.log (player.isNaturalBlackJack());
-console.log(player.calculateHand());
-console.log(player.isBust());
-console.log((new Card("as", 11)).isAce());
