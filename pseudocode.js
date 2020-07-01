@@ -38,6 +38,7 @@ class PlayerParent {
     isBust(){
         return (this.calculateHand() > 21);
     }
+
 }
 
 class Player extends PlayerParent {
@@ -46,6 +47,16 @@ class Player extends PlayerParent {
         this.wallet = wallet;
         this.bet = bet;
     )
+
+    isNaturalBlackJack() {
+        if (this.hand.length > 2) {
+            return false;
+        } else {
+            if (this.calculateHand == 21 && (this.hand[0].name[0] == "a" | this.hand[1].name[1] == "a")) {
+                return true;
+            }
+        }
+    }
 
 
 }
@@ -105,27 +116,45 @@ class Blackjack {
     }
 
     startGame(){
-        deal two cards to player
-        deal two cards to dealer
 
-        ask the player hit or stay
-        while hit {
-            deal card to player
+        let playAgain = true;
+        while (playAgain) {
+            deal two cards to player
+            deal two cards to dealer
+
+            ask the player hit or stay
+            while hit {
+                deal card to player
+            }
+            
+            Display player hand status
+
+            //Dealer plays
+            while hand < 17 {
+                deal card to dealer
+            }
+
+            Compare hands.
+            let dealerTotal = dealer.calculateHand();
+            let playerTotal = player.calculateHand();
+
+            If dealerTotal > playerTotal {
+                player loses
+            } else if dealerTotal < playerTotal {
+                player wins
+                if (player.isNaturalBlackjack) {
+                    player.wallet =+ player.bet * 2;
+                } else {
+                    player.wallet =+ player.bet * 1.5;
+                }
+            } else {
+                // It's a push.
+                return bet to player wallet
+            }
+            Ask player if they want to play again
         }
-        
-        Display player hand status
 
-        //Dealer plays
-        while hand < 17 {
-            deal card to dealer
         }
-
-        Compare hands.
-
-
-
-
-    }
 }
 
 
