@@ -69,9 +69,9 @@ class Player extends PlayerParent {
     }
 
 //==================================================================================================
-// isNaturalBlackJack() - returns true if holding an ace and a 10 card
+// isNaturalBlackjack() - returns true if holding an ace and a 10 card
 //==================================================================================================
-isNaturalBlackJack() {
+isNaturalBlackjack() {
         if (this.hand.length > 2) {
             return false;
         } else {
@@ -179,7 +179,18 @@ class Blackjack {
         return nextCard;
     }
 
+ 
+//==================================================================================================
+// payWinnings(player, rate) - pay the player at the bet * rate 
+//==================================================================================================
+    payWinnings(player, rate){
+        let winnings = this.player.bet * rate;
+        this.player.wallet += winnings;
+        this.player.bet = 0;
+    }
+
     startGame(){
+        console.log("Player: ", this.player);
         let playAgain = true;
         while (playAgain) {
         console.log("==== Start round by dealing 2 cards to player and dealer ====");
@@ -207,32 +218,59 @@ class Blackjack {
                 this.dealer.hit(this.dealer);
             }
             console.log("Dealer hand:  ", this.dealer.calculateHand());
-            playAgain = false;
 
-        //     Compare hands.
-        //     let dealerTotal = dealer.calculateHand();
-        //     let playerTotal = player.calculateHand();
+        //     Compare hands
+            let dealerTotal = this.dealer.calculateHand();
+            let playerTotal = this.player.calculateHand();
+            let playerWinLosePush = "push";
 
-        //     If dealerTotal > playerTotal {
-        //         player loses
-        //     } else if dealerTotal < playerTotal {
-        //         player wins
-        //         if (player.isNaturalBlackjack) {
-        //             player.wallet =+ player.bet * 2;
-        //         } else {
-        //             player.wallet =+ player.bet * 1.5;
-        //         }
-        //     } else {
-        //         // It's a push.
-        //         return bet to player wallet
-        //     }
+            if (this.player.isBust()){
+                console.log(`==== Player loses with bust at (${playerTotal}) ====`);
+                playerWinLosePush = "lose"
+                this.player.bet = 0;
+            } else if (this.dealer.isBust()) {
+                console.log(`==== Player wins with  ${playerTotal}  Dealer at bust (${dealerTotal}) ====`);
+                playerWinLosePush = "win";
+            } else if (playerTotal > dealerTotal) {
+                playerWinLosePush = "win";
+                console.log(`==== Player wins with  ${playerTotal}  Dealer (${dealerTotal}) ====`);
+            } else if (playerTotal < dealerTotal) {
+                playerWinLosePush = "lose";
+                console.log(`==== Dealer wins with  ${dealerTotal}  Player (${playerTotal}) ====`);
+            } else {
+                console.log(`==== It's a Push with Dealer at ${dealerTotal}  Player at ${playerTotal} ====`);
+                playerWinLosePush = "push";
+            }
+
+            switch (playerWinLosePush) {
+                case "win":
+                    if (playerTotal == 21 && this.player.isNaturalBlackjack()) {
+                        console.log(`==== Pay Player double for Natural Blackjack ====`);
+                        this.payWinnings(this.player, 2);
+                    } else {
+                        console.log(`==== Pay Player 1.5 ====`);
+                        this.payWinnings(this.player, 1.5);
+                    }
+                        break;
+
+                case "lose":
+                    this.player.bet = 0;
+                    break;
+
+                case "push":
+                    this.player.wallet =+ this.player.bet;
+                    this.player.bet = 0;
+                    break;
+            }
+
+            console.log("Player: ", this.player);
+
         //     Ask player if they want to play again
+                    playAgain = false;
         }
 
-        }
-
-    
-}
+    }
+}// end of Blackjack class
 
 
 
