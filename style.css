@@ -1,0 +1,136 @@
+.container{
+    display: grid;
+    background-color: darkorange;
+    height: 100vh;
+    width: 100vw;
+    z-index: 1000;
+
+    grid-template-areas:    "title title title"
+                            "dealer dealer dealer"
+                            "player player player"
+                            "controls controls controls"
+                            "status status status";
+}
+
+.mainTitle{
+    grid-area: title;
+    background-color: bisque;
+    border: black;
+    width: 100%;
+    text-align: center;
+}
+
+.dealer{
+    grid-area: dealer;
+    border: black 3px;
+    background-color: burlywood;
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    width: 100vw;
+
+}
+
+.dealerText{
+    border: black;
+    top: 50%;
+    width: 30vw;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.dealerCards{
+    border: black;
+    width: 70vw;
+    display: flex;
+    flex-direction: row;
+}
+
+.player{
+    grid-area: player;
+    border: black;
+    background-color: goldenrod;
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100vw;
+}
+
+.playerText{
+    border: black;
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.playerCards{
+    border: black;
+    width: 70vh;
+}
+
+.controls{
+    grid-area: controls;
+    border: black;
+    background-color: chocolate;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
+
+.button{
+    width: 100%;
+    text-align: center;
+}
+
+.status{
+    grid-area: status;
+    text-align: center;
+    border: black 3px;
+    width: 100%;
+}
+
+/* Player Stats Table */
+table.playerStats {
+    border: 2px solid #A40808;
+    background-color: #EEE7DB;
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+  }
+  table.playerStats td, table.playerStats th {
+    border: 1px solid #AAAAAA;
+    padding: 3px 2px;
+  }
+  table.playerStats tbody td {
+    font-size: 13px;
+  }
+  table.playerStats tr:nth-child(even) {
+    background: #F5C8BF;
+  }
+  table.playerStats thead {
+    background: #A40808;
+  }
+  table.playerStats thead th {
+    font-size: 19px;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;
+    border-left: 2px solid #A40808;
+  }
+  table.playerStats thead th:first-child {
+    border-left: none;
+  }
+  
+  table.playerStats tfoot td {
+    font-size: 13px;
+  }
+  table.playerStats tfoot .links {
+    text-align: right;
+  }
+  table.playerStats tfoot .links a{
+    display: inline-block;
+    background: #FFFFFF;
+    color: #A40808;
+    padding: 2px 8px;
+    border-radius: 5px;
+  }

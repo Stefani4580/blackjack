@@ -7,6 +7,58 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+    <div class="container">
+        <div class="mainTitle">
+            <h1>Welcome to Blackjack</h1>
+        </div>
+        <div class="mainGameSpace">
+            <div class="dealer">
+                <div class="dealerText">
+                    <h2>Dealer</h2>
+                    <h2 id="dealerScore"></h2>
+                </div>
+                <div class="dealerCards">
+                    <img id="holeCard" src="./assets/cards/purple_back.jpg" alt="" width="100px" height="200px">
+                </div>
+            </div>
+            <div class="player">
+                <div class="playerText">
+                    <h2>Player</h2>
+                    <table class="playerStats">
+                        <thead>
+                        <tr>
+                        <th>Bet</th>
+                        <th>Wallet</th>
+                        <th>Score</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                        <td id="bet">cell1_1</td>
+                        <td id="wallet">cell1_2</td>
+                        <td id="score">cell1_3</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="playerCards">
+                </div>
+            </div>
+            <div class="controls">
+                <div class="button">
+                    <button id="hitButton" onclick="blackjack.hitButtonClicked()">Hit</button>
+                </div>
+                <div class="button">
+                    <button id="stayButton" onclick="blackjack.stayButtonClicked()">Stay</button>                 
+                </div>
+                <div class="button">
+                    <button id="quitButton" onclick="blackjack.quitButtonClicked()">Quit</button>                   
+                </div>
+            </div>
+            <div>
+                <h2 id="status">Status</h2>
+            </div>
+    </div>
     <script src="./app.js"></script>
 </body>
 </html>
