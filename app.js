@@ -102,6 +102,7 @@ class Dealer extends PlayerParent {
         nextCard = blackjack.nextCard();
         player.hand.push(nextCard);
         this.displayPlayerCard(nextCard);
+        document.getElementById("score").innerText = player.calculateHand();
         console.log("Player hand: ", player.hand);
 
         // deal two cards to dealer revealing on the second
@@ -116,7 +117,8 @@ class Dealer extends PlayerParent {
         let nextCard = blackjack.nextCard();
         player.hand.push(nextCard);
         if (player instanceof Player) {
-            this.displayPlayerCard(nextCard);          
+            this.displayPlayerCard(nextCard);
+            document.getElementById("score").innerText = player.calculateHand();        
         } else {
             this.displayDealerCard(nextCard);
         }
@@ -169,6 +171,7 @@ class Blackjack {
         this.staticDeck = this.deck;
         this.dealer = new Dealer("dealer",[]);
         this.player = new Player("Stefani", 500, 100,[]);
+        this.displayPlayerStats();
     }
 //==================================================================================================
 // initializeDeckOfCards() - creates the deck of cards in a Map
@@ -182,14 +185,14 @@ class Blackjack {
         // create each suit
         for (let i = 0; i < suit.length; i++) {
             // create ace
-            let ace = new Card(`a${suit[i]}`, 11, `./assets/cards/a${suit[i]}.jpg` );
+            let ace = new Card(`a${suit[i]}`, 11, `../assets/cards/a${suit[i]}.jpg` );
             console.log(ace);
             deck.set(cardId,ace);
             cardId++;
             // deck.add(ace);
             // create face cards
             for (let j = 0; j < faceCards.length; j++) {
-                let card = new Card(`${faceCards[j]}${suit[i]}`, 10, `./assets/cards/${faceCards[j]}${suit[i]}.jpg`);
+                let card = new Card(`${faceCards[j]}${suit[i]}`, 10, `../assets/cards/${faceCards[j]}${suit[i]}.jpg`);
                 console.log(card);
                 deck.set(cardId, card);
                 cardId++;
@@ -197,7 +200,7 @@ class Blackjack {
             }
             // create number cards
             for (let j = 2; j <= 10; j++) {
-                let card = new Card(`${j}${suit[i]}`, j, `./assets/cards/${j}${suit[i]}.jpg`);
+                let card = new Card(`${j}${suit[i]}`, j, `../assets/cards/${j}${suit[i]}.jpg`);
                 console.log(card);
                 deck.set(cardId, card);   
                 cardId++;
@@ -206,6 +209,17 @@ class Blackjack {
         }
         return deck;              
     }
+
+//==================================================================================================
+// displayPlayerStats() - display the initial stats in table
+//==================================================================================================
+    displayPlayerStats(){
+        document.getElementById("bet").innerText = `$${this.player.bet}`;
+        document.getElementById("wallet").innerText = `$${this.player.wallet}`;
+        document.getElementById("score").innerText = 0;
+    }
+
+
 
 //==================================================================================================
 // nextCard() - return next random card from deck and removes from deck
@@ -243,6 +257,10 @@ class Blackjack {
         this.dealersTurn();
         this.turnOverDealersCard();
         this.compareHands();
+    }
+
+    playAgainButtonClicked(){
+        this.startHand();
     }
 
     dealersTurn(){
