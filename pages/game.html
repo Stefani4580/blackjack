@@ -23,7 +23,7 @@
             </div>
             <div class="player">
                 <div class="playerText">
-                    <h2>Player</h2>
+                    <h2 id="playerName">Player</h2>
                     <table class="playerStats">
                         <thead>
                         <tr>
@@ -52,15 +52,32 @@
                     <button id="stayButton" onclick="blackjack.stayButtonClicked()">Stay</button>                 
                 </div>
                 <div class="button">
-                    <button id="playAgainButton" onclick="blackjack.playAgainButtonClicked()">Play Again</button>                   
+                    <button id="nextHandButton" onclick="blackjack.nextHandButtonClicked()">Next Hand</button>                 
+                </div>
+               <div class="button">
+                    <button id="startNewGameButton" onclick="blackjack.startNewGameButtonClicked()">Start New Game</button>                   
                 </div>
                 <div class="button">
                     <button id="quitButton" onclick="blackjack.quitButtonClicked()">Quit</button>                   
                 </div>
-          </div>
-            <div>
-                <h2 id="status">Status</h2>
             </div>
+            <div class="statusDiv">
+                <h2 id="statusText">Status</h2>
+            </div>
+    </div>
+    <button class="modal-btn">Modal</button>
+    <div class="modal-bg">
+        <div class="modal">
+            <h1>Let's get started</h1>
+            <label for="name">Name:  </label>
+            <input type="text" name="name" id="name">
+            <label for="wallet">Wallet:  </label>
+            <input type="number" name="wallet" id="initialWallet">
+            <label for="bet">Bet:  </label>
+            <input type="number" name="bet" id="initialBet">
+            <button type="button" onclick="blackjack.startGameInfo()">Play</button>
+            <span class="modal-close">X</span>
+        </div>
     </div>
     <script src="../app.js"></script>
 </body>
