@@ -214,7 +214,8 @@ class Blackjack {
     nextCard(){
         let index = returnRandomNumber(0, this.activeDeck.length-1);
         let nextCard = this.activeDeck[index];
-        this.discardDeck.push(this.activeDeck.splice(index, 1));
+        this.activeDeck.splice(index, 1);
+        this.discardDeck.push(nextCard);
         return nextCard;
     }
  
@@ -259,7 +260,7 @@ class Blackjack {
 // nextHandButtonClicked() - Clear the board.  Dealer starts the next hand.
 //==================================================================================================
     nextHandButtonClicked(){
-        
+
     }
 
 
@@ -298,7 +299,7 @@ class Blackjack {
         // Clear model for Dealer and Player.  Reconstitute deck.
         this.dealer.hand = [];
         this.player.hand = [];
-        this.activeDeck.push(this.discardDeck);
+        this.discardDeck.forEach(card => this.activeDeck.push(card));
     }
 
 //==================================================================================================
@@ -479,7 +480,6 @@ class Blackjack {
 
 
 const blackjack = new Blackjack();
-let modalBtn = document.querySelector(".modal-btn");
 let modalBg = document.querySelector(".modal-bg");
 let modalClose = document.querySelector(".modal-close");
 
