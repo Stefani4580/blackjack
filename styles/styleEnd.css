@@ -1,0 +1,17 @@
+.container{
+    height: 100vh;
+    width: 100vw;
+    background-image: url("../assets/jt-gqCYRe2ml6k-unsplash.jpg");
+    background-position:center;
+    background-size:cover;
+    background-repeat:no-repeat;
+    opacity: 70%;
+  }
+
+  .endGame{
+    position: absolute;
+    top: 40%;
+    width: 100%;
+    text-align: center;
+    background-color: antiquewhite;  
+  }

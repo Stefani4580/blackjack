@@ -235,9 +235,20 @@ class Blackjack {
     hitButtonClicked(){
         this.dealer.hit(this.player);
         if (this.player.isBust()) {
-            document.getElementById("hitButton").disabled = true;
-            document.getElementById("stayButton").disabled = true;
-            document.getElementById("statusText").innerText = `${this.player.name} lost!  Busted at ${this.player.calculateHand()}!`
+            if (this.player.wallet <= 0){
+                document.getElementById("statusText").innerText = `${this.player.name} lost!  Busted at ${this.player.calculateHand()}\nNow ${this.player.name} is broke!  Game Over!!`;
+                document.getElementById("hitButton").disabled = true;
+                document.getElementById("stayButton").disabled = true;
+                document.getElementById("nextHandButton").disabled = true;            
+            } else {
+                document.getElementById("hitButton").disabled = true;
+                document.getElementById("stayButton").disabled = true;
+                document.getElementById("nextHandButton").disabled = false;            
+
+                document.getElementById("statusText").innerText = `${this.player.name} lost!  Busted at ${this.player.calculateHand()}`;                
+            }
+            document.getElementById("bet").innerText = "$0";
+            document.getElementById("wallet").innerText = `$${this.player.wallet}`;    
         } else {
             document.getElementById("score").innerText = this.player.calculateHand();
         }
@@ -252,8 +263,14 @@ class Blackjack {
         this.dealersTurn();
         this.turnOverDealersHoleCard();
         this.compareHands();
+
+        // Display results
+        document.getElementById("bet").innerText = "$0";
+        document.getElementById("wallet").innerText = `$${this.player.wallet}`;
+
         document.getElementById("hitButton").disabled = true;
         document.getElementById("stayButton").disabled = true;
+        document.getElementById("nextHandButton").disabled = false;            
     }
 
 //==================================================================================================
@@ -266,31 +283,59 @@ class Blackjack {
     }
 
 //==================================================================================================
-// nextHandInfo() - Get the next bet.  Update player model and UI.
+// nextHandInfo() - Get the next bet.  Update player model and UI.  Start next hand.
 //==================================================================================================
     nextHandInfo(){
         let playerBet = document.getElementById("nextBet").value;
 
-        this.player.wallet -= playerBet;
-        this.player.bet = playerBet;
-        let nextHandModal = document.querySelector(".nextHandModal");
-        nextHandModal.classList.remove("makeModalVisible");
+        if (playerBet > this.player.wallet) {
+            alert(`You cannot bet more than your wallet.  Wallet: $${this.player.wallet}`);   
+            this.nextHandButtonClicked(); 
+        } else {
+            this.player.wallet -= playerBet;
+            this.player.bet = playerBet;
+            let nextHandModal = document.querySelector(".nextHandModal");
+            nextHandModal.classList.remove("makeModalVisible");
 
-        document.getElementById("bet").innerText = `$${this.player.bet}`;
-        document.getElementById("wallet").innerText = `$${this.player.wallet}`;
+            // Clear dealer and player hands
+            document.querySelector(".playerCards").innerHTML = "";
+
+            const cardBackImg = document.createElement("img");
+            cardBackImg.id = "holeCard"
+            cardBackImg.src = "../assets/cards/purple_back.jpg";
+            cardBackImg.height = 200;
+            cardBackImg.width = 100;
+
+            let dealerCardsDiv = document.querySelector(".dealerCards"); 
+            dealerCardsDiv.innerHTML = "";
+            dealerCardsDiv.appendChild(cardBackImg);
+
+            document.getElementById("statusText").innerText = "";
+
+            document.getElementById("dealerScore").innerText = "";
 
 
+            document.getElementById("bet").innerText = `$${this.player.bet}`;
+            document.getElementById("wallet").innerText = `$${this.player.wallet}`;
+            document.getElementById("hitButton").disabled = false;
+            document.getElementById("stayButton").disabled = false;
+            document.getElementById("nextHandButton").disabled = true;            
 
+            // Clear model for Dealer and Player.  Reconstitute deck.
+            this.dealer.hand = [];
+            this.player.hand = [];
+            
+            this.dealer.startHand(this.player);
+        }
     }
-
 
 //==================================================================================================
 // startNewGameButtonClicked() - Clear the board.  Dealer starts the next hand.
 //==================================================================================================
     startNewGameButtonClicked(){
         this.clearBoard();
-        modalBg.classList.add("bg-active");
-        // this.dealer.startHand(this.player);
+        let newGameModal = document.querySelector(".newGameModal");
+        newGameModal.classList.add("makeModalVisible");
     }
 
 //==================================================================================================
@@ -380,16 +425,23 @@ class Blackjack {
                     winnings = this.payWinnings(this.player, 1.5);
                 }
                 document.getElementById("statusText").innerText = `${this.player.name} won ${winnings}!`;
-                    break;
+                this.player.wallet += winnings;
+                break;
 
             case "lose":
                 document.getElementById("statusText").innerText = `${this.player.name} lost ${this.player.bet}!`;
                 this.player.bet = 0;
+                if (this.player.wallet <= 0){
+                    document.getElementById("statusText").innerText = `${this.player.name} is broke!  Game Over!`;
+                    document.getElementById("hitButton").disabled = true;
+                    document.getElementById("stayButton").disabled = true;
+                    document.getElementById("nextHandButton").disabled = true;            
+                }
                 break;
 
             case "push":
                 document.getElementById("statusText").innerText = `Dealer and ${this.player.name} have the same score.  It's a push!`;
-                this.player.wallet =+ this.player.bet;
+                this.player.wallet += this.player.bet;
                 this.player.bet = 0;
                 break;
         }
@@ -404,14 +456,22 @@ class Blackjack {
         let playerWallet = document.getElementById("initialWallet").value;
         let playerBet = document.getElementById("initialBet").value;
 
-        this.player.name = playerName;
-        this.player.wallet = playerWallet - playerBet;
-        this.player.bet = playerBet;
-        let newGameModal = document.querySelector(".newGameModal");
-        newGameModal.classList.remove("makeModalVisible");
-        this.displayInitialPlayerStats();
+        if (playerBet > playerWallet) {
+            alert(`You cannot bet more than your wallet.  Wallet: $${this.player.wallet}`);
+            
+        } else {
+            this.player.name = playerName;
+            this.player.wallet = playerWallet - playerBet;
+            this.player.bet = playerBet;
+            let newGameModal = document.querySelector(".newGameModal");
+            newGameModal.classList.remove("makeModalVisible");
+            document.getElementById("nextHandButton").disabled = true;            
 
-        blackjack.startGame();
+            this.displayInitialPlayerStats();
+
+            blackjack.startGame();       
+        }
+
     }
 
     startGame(){
@@ -420,15 +480,14 @@ class Blackjack {
 }// end of Blackjack class
 
 
-
+// Create instance of game
 const blackjack = new Blackjack();
+
+//Display Modal to capture initial player data
 let newGameModal = document.querySelector(".newGameModal");
 let modalClose = document.querySelector(".modal-close");
-//Display Modal to capture initial player data
 newGameModal.classList.add("makeModalVisible");
 
 modalClose.addEventListener("click", function (){
-    modalBg.classList.remove("makeModalVisible");
+    newGameModal.classList.remove("makeModalVisible");
 });
-
-// blackjack.startGame();
