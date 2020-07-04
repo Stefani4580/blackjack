@@ -65,7 +65,7 @@
                 <h2 id="statusText">Status</h2>
             </div>
     </div>
-    <div class="modal-bg">
+    <div class="newGameModal">
         <div class="modal">
             <h1>Let's get started</h1>
             <label for="name">Name:  </label>
@@ -75,6 +75,15 @@
             <label for="bet">Bet:  </label>
             <input type="number" name="bet" id="initialBet">
             <button type="button" onclick="blackjack.startGameInfo()">Play</button>
+            <span class="modal-close">X</span>
+        </div>
+    </div>
+    <div class="nextHandModal">
+        <div class="modal">
+            <h1>What's your bet?</h1>
+            <label for="bet">Bet:  </label>
+            <input type="number" name="bet" id="nextBet">
+            <button type="button" onclick="blackjack.nextHandInfo()">Play</button>
             <span class="modal-close">X</span>
         </div>
     </div>

@@ -260,6 +260,26 @@ class Blackjack {
 // nextHandButtonClicked() - Clear the board.  Dealer starts the next hand.
 //==================================================================================================
     nextHandButtonClicked(){
+        // Display next hand modal
+        let nextHandModal = document.querySelector(".nextHandModal");
+        nextHandModal.classList.add("makeModalVisible");
+    }
+
+//==================================================================================================
+// nextHandInfo() - Get the next bet.  Update player model and UI.
+//==================================================================================================
+    nextHandInfo(){
+        let playerBet = document.getElementById("nextBet").value;
+
+        this.player.wallet -= playerBet;
+        this.player.bet = playerBet;
+        let nextHandModal = document.querySelector(".nextHandModal");
+        nextHandModal.classList.remove("makeModalVisible");
+
+        document.getElementById("bet").innerText = `$${this.player.bet}`;
+        document.getElementById("wallet").innerText = `$${this.player.wallet}`;
+
+
 
     }
 
@@ -387,7 +407,8 @@ class Blackjack {
         this.player.name = playerName;
         this.player.wallet = playerWallet - playerBet;
         this.player.bet = playerBet;
-        modalBg.classList.remove("bg-active");
+        let newGameModal = document.querySelector(".newGameModal");
+        newGameModal.classList.remove("makeModalVisible");
         this.displayInitialPlayerStats();
 
         blackjack.startGame();
@@ -395,98 +416,19 @@ class Blackjack {
 
     startGame(){
         this.dealer.startHand(this.player);
-        console.log("Player: ", this.player);
-        // let playAgain = true;
-        // while (playAgain) {
-        // console.log("==== Start round by dealing 2 cards to player and dealer ====");
-        //     this.dealer.startHand(this.player);
-            
-        //     // let hitOrStay = prompt("Would you like to hit or stay?","h/s");
-        //     console.log("==== Player says hit ====");
-        //     let hitOrStay = "h";
-        //     while (hitOrStay == "h"){
-        //         console.log(`==== Hit Player at ${this.player.calculateHand()} ====`);
-        //         this.dealer.hit(this.player);
-        //         // hitOrStay = prompt("Would you like to hit or stay?","h/s");
-        //         hitOrStay = "s";
-        //     }
-            
-        //     Display player hand status
-            // console.log("Player hand:  ", this.player.calculateHand());
-            // if (this.player.isBust()){
-            //     console.log("Player has busted with ", this.player.calculateHand());
-            // }
-            // console.log("==== Dealer's turn ====");
-
-            // while (this.dealer.calculateHand() < 17) {
-            //     console.log(`==== Hit Dealer at ${this.dealer.calculateHand()} ====`);
-            //     this.dealer.hit(this.dealer);
-            // }
-            // console.log("Dealer hand:  ", this.dealer.calculateHand());
-
-        //     Compare hands
-            // let dealerTotal = this.dealer.calculateHand();
-            // let playerTotal = this.player.calculateHand();
-            // let playerWinLosePush = "push";
-
-            // if (this.player.isBust()){
-            //     console.log(`==== Player loses with bust at (${playerTotal}) ====`);
-            //     playerWinLosePush = "lose"
-            //     this.player.bet = 0;
-            // } else if (this.dealer.isBust()) {
-            //     console.log(`==== Player wins with  ${playerTotal}  Dealer at bust (${dealerTotal}) ====`);
-            //     playerWinLosePush = "win";
-            // } else if (playerTotal > dealerTotal) {
-            //     playerWinLosePush = "win";
-            //     console.log(`==== Player wins with  ${playerTotal}  Dealer (${dealerTotal}) ====`);
-            // } else if (playerTotal < dealerTotal) {
-            //     playerWinLosePush = "lose";
-            //     console.log(`==== Dealer wins with  ${dealerTotal}  Player (${playerTotal}) ====`);
-            // } else {
-            //     console.log(`==== It's a Push with Dealer at ${dealerTotal}  Player at ${playerTotal} ====`);
-            //     playerWinLosePush = "push";
-            // }
-
-            // switch (playerWinLosePush) {
-            //     case "win":
-            //         if (playerTotal == 21 && this.player.isNaturalBlackjack()) {
-            //             console.log(`==== Pay Player double for Natural Blackjack ====`);
-            //             this.payWinnings(this.player, 2);
-            //         } else {
-            //             console.log(`==== Pay Player 1.5 ====`);
-            //             this.payWinnings(this.player, 1.5);
-            //         }
-            //             break;
-
-            //     case "lose":
-            //         this.player.bet = 0;
-            //         break;
-
-            //     case "push":
-            //         this.player.wallet =+ this.player.bet;
-            //         this.player.bet = 0;
-            //         break;
-            // }
-
-            // console.log("Player: ", this.player);
-
-        //     Ask player if they want to play again
-                    // playAgain = false;
-        // }
-
     }
 }// end of Blackjack class
 
 
 
 const blackjack = new Blackjack();
-let modalBg = document.querySelector(".modal-bg");
+let newGameModal = document.querySelector(".newGameModal");
 let modalClose = document.querySelector(".modal-close");
-
-modalBg.classList.add("bg-active");
+//Display Modal to capture initial player data
+newGameModal.classList.add("makeModalVisible");
 
 modalClose.addEventListener("click", function (){
-    modalBg.classList.remove("bg-active");
+    modalBg.classList.remove("makeModalVisible");
 });
 
 // blackjack.startGame();
