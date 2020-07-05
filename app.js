@@ -128,7 +128,12 @@ class Dealer extends PlayerParent {
         cardImg.src = `${card.imageFilename}`;
         cardImg.height = 200;
         cardImg.width = 100;
-        document.querySelector(".playerCards").appendChild(cardImg); 
+
+        $(document).ready(function () {
+            $(".playerCards").append(cardImg);
+            $(".playerCards").last().show(6000);
+        });
+        // document.querySelector(".playerCards").appendChild(cardImg); 
     }
 
     displayDealerCard(card){
@@ -136,7 +141,11 @@ class Dealer extends PlayerParent {
         cardImg.src = `${card.imageFilename}`;
         cardImg.height = 200;
         cardImg.width = 100;
-        document.querySelector(".dealerCards").appendChild(cardImg); 
+        $(document).ready(function () {
+            $(".dealerCards").append(cardImg);
+        });
+
+        // document.querySelector(".dealerCards").appendChild(cardImg); 
     }
 }
 
@@ -308,7 +317,11 @@ class Blackjack {
 
             let dealerCardsDiv = document.querySelector(".dealerCards"); 
             dealerCardsDiv.innerHTML = "";
-            dealerCardsDiv.appendChild(cardBackImg);
+            $(document).ready(function () {
+                $(".dealerCards").append(cardBackImg);
+            });  
+    
+            // dealerCardsDiv.appendChild(cardBackImg);
 
             document.getElementById("statusText").innerText = "";
 
@@ -356,7 +369,11 @@ class Blackjack {
 
         let dealerCardsDiv = document.querySelector(".dealerCards"); 
         dealerCardsDiv.innerHTML = "";
-        dealerCardsDiv.appendChild(cardBackImg);
+        $(document).ready(function () {
+            $(".dealerCards").append(cardBackImg);
+        });
+
+        // dealerCardsDiv.appendChild(cardBackImg);
 
         document.getElementById("hitButton").disabled = false;
         document.getElementById("stayButton").disabled = false;
@@ -447,6 +464,7 @@ class Blackjack {
                 document.getElementById("statusText").innerText = `Dealer and ${this.player.name} have the same score.  It's a push!`;
                 this.player.wallet += this.player.bet;
                 this.player.bet = 0;
+                document.getElementById("nextHandButton").disabled = false;            
                 break;
         }
 

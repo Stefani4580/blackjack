@@ -5,11 +5,11 @@
     width: 100vw;
     z-index: 1000;
 
-    grid-template-areas:    "title title title"
-                            "dealer dealer dealer"
-                            "player player player"
-                            "controls controls controls"
-                            "status status status";
+    grid-template-areas:    "title title"
+                            "dealer dealer"
+                            "player player"
+                            "controls controls"
+                            "status status";
 }
 
 .mainTitle{
@@ -52,7 +52,7 @@
     border: black;
     background-color: goldenrod;
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     width: 100vw;
 }
 
