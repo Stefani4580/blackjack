@@ -259,6 +259,8 @@ class Blackjack {
 //                      Compare hands.
 //==================================================================================================
     stayButtonClicked(){
+        document.getElementById("hitButton").disabled = true;
+        document.getElementById("stayButton").disabled = true;
         // Dealer's turn
         this.dealersTurn();
         this.turnOverDealersHoleCard();
@@ -268,9 +270,7 @@ class Blackjack {
         document.getElementById("bet").innerText = "$0";
         document.getElementById("wallet").innerText = `$${this.player.wallet}`;
 
-        document.getElementById("hitButton").disabled = true;
-        document.getElementById("stayButton").disabled = true;
-        document.getElementById("nextHandButton").disabled = false;            
+        // document.getElementById("nextHandButton").disabled = false;            
     }
 
 //==================================================================================================
@@ -286,7 +286,7 @@ class Blackjack {
 // nextHandInfo() - Get the next bet.  Update player model and UI.  Start next hand.
 //==================================================================================================
     nextHandInfo(){
-        let playerBet = document.getElementById("nextBet").value;
+        let playerBet = parseInt(document.getElementById("nextBet").value);
 
         if (playerBet > this.player.wallet) {
             alert(`You cannot bet more than your wallet.  Wallet: $${this.player.wallet}`);   
@@ -321,7 +321,7 @@ class Blackjack {
             document.getElementById("stayButton").disabled = false;
             document.getElementById("nextHandButton").disabled = true;            
 
-            // Clear model for Dealer and Player.  Reconstitute deck.
+            // Clear model for Dealer and Player.
             this.dealer.hand = [];
             this.player.hand = [];
             
@@ -360,6 +360,7 @@ class Blackjack {
 
         document.getElementById("hitButton").disabled = false;
         document.getElementById("stayButton").disabled = false;
+        document.getElementById("nextHandButton").disabled = true;            
 
         // Clear model for Dealer and Player.  Reconstitute deck.
         this.dealer.hand = [];
@@ -424,18 +425,21 @@ class Blackjack {
                     console.log(`==== Pay Player 1.5 ====`);
                     winnings = this.payWinnings(this.player, 1.5);
                 }
-                document.getElementById("statusText").innerText = `${this.player.name} won ${winnings}!`;
+                document.getElementById("statusText").innerText = `${this.player.name} won $${winnings}!`;
                 this.player.wallet += winnings;
+                document.getElementById("nextHandButton").disabled = false;            
                 break;
 
             case "lose":
-                document.getElementById("statusText").innerText = `${this.player.name} lost ${this.player.bet}!`;
+                document.getElementById("statusText").innerText = `${this.player.name} lost $${this.player.bet}!`;
                 this.player.bet = 0;
                 if (this.player.wallet <= 0){
                     document.getElementById("statusText").innerText = `${this.player.name} is broke!  Game Over!`;
                     document.getElementById("hitButton").disabled = true;
                     document.getElementById("stayButton").disabled = true;
                     document.getElementById("nextHandButton").disabled = true;            
+                } else {
+                document.getElementById("nextHandButton").disabled = false;            
                 }
                 break;
 
@@ -445,6 +449,7 @@ class Blackjack {
                 this.player.bet = 0;
                 break;
         }
+
     }
 
 
@@ -453,11 +458,11 @@ class Blackjack {
 //==================================================================================================
     startGameInfo(){
         let playerName = document.getElementById("name").value;
-        let playerWallet = document.getElementById("initialWallet").value;
-        let playerBet = document.getElementById("initialBet").value;
+        let playerWallet = parseInt(document.getElementById("initialWallet").value);
+        let playerBet = parseInt(document.getElementById("initialBet").value);
 
         if (playerBet > playerWallet) {
-            alert(`You cannot bet more than your wallet.  Wallet: $${this.player.wallet}`);
+            alert(`You cannot bet more than your wallet.  Wallet: $${playerWallet}`);
             
         } else {
             this.player.name = playerName;
