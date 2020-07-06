@@ -30,14 +30,13 @@ h2{
 
 .dealer{
     grid-area: dealer;
-    border: black 3px;
+    /* border: black 3px; */
     background-color: burlywood;
     background-image: url("../assets/sheri-hooley-2ha8OG5bOmg-unsplash.jpg");
     background-position:center;
     background-size:cover;
     background-repeat:no-repeat;
    
-    /* opacity: 70%; */
     display: flex;
     flex-direction: row;
     align-content: space-between;
@@ -52,7 +51,10 @@ h2{
     text-align: center;
     padding: 3px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .dealerCards{
@@ -96,11 +98,20 @@ h2{
     flex-direction: row;
     align-content: center;
     justify-content: space-around;
+    padding-top: 1em;
 }
 
-.button{
+.controls button{
     width: 100%;
     text-align: center;
+    background-color: #ffc971;
+    padding: 1em 2em;
+}
+
+.controls button:disabled {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
 }
 
 
@@ -108,6 +119,7 @@ h2{
 .statusDiv{
     grid-area: status;
     text-align: center;
+    top: 0;
 }
 
 /* Player Stats Table */
@@ -178,7 +190,7 @@ table.playerStats {
   
   .modal{
     position: relative;
-    background-image: linear-gradient(#ffc971, #ff9505);
+    background-image: linear-gradient(bisque, #FFC971);
     width: 70%;
     height: 70%;
     display: flex;
