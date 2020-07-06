@@ -135,13 +135,13 @@ table.playerStats {
     padding: 3px 2px;
   }
   table.playerStats tbody td {
-    font-size: 13px;
+    font-size: 20px;
   }
   table.playerStats thead {
     background: #cc5803;
   }
   table.playerStats thead th {
-    font-size: 19px;
+    font-size: 25px;
     font-weight: bold;
     color: #FFFFFF;
     text-align: center;
