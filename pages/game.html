@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blackjack</title>
     <link rel="stylesheet" href="../styles/styleGame.css">
+    <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Skranji:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
@@ -12,7 +14,6 @@
         <div class="mainTitle">
             <h1>Welcome to Blackjack</h1>
         </div>
-        <div class="mainGameSpace">
             <div class="dealer">
                 <div class="dealerText">
                     <h2>Dealer</h2>
@@ -60,22 +61,22 @@
                 </div>
                 <div class="button">
                     <a href="./endGame.html">
-                        <h2>Quit Game</h2>
+                        <h3>Quit Game</h3>
                     </a>
                 </div>        
             </div>
             <div class="statusDiv">
-                <h2 id="statusText">Status</h2>
+                <h2 id="statusText"></h2>
             </div>
     </div>
     <div class="newGameModal">
         <div class="modal">
-            <h1>Let's get started</h1>
-            <label for="name">Name:  </label>
+            <h2>Let's get started</h2>
+            <label for="name"><h3>Name:  </h3></label>
             <input type="text" name="name" id="name">
-            <label for="wallet">Wallet:  </label>
+            <label for="wallet"><h3>Wallet:</h3></label>
             <input type="number" name="wallet" id="initialWallet">
-            <label for="bet">Bet:  </label>
+            <label for="bet"><h3>Bet:  </h3></label>
             <input type="number" name="bet" id="initialBet">
             <button type="button" onclick="blackjack.startGameInfo()">Play</button>
             <span class="modal-close">X</span>
@@ -83,8 +84,8 @@
     </div>
     <div class="nextHandModal">
         <div class="modal">
-            <h1>What's your bet?</h1>
-            <label for="bet">Bet:  </label>
+            <h2>What's your bet?</h2>
+            <label for="bet"><h3>Bet:  </h3></label>
             <input type="number" name="bet" id="nextBet">
             <button type="button" onclick="blackjack.nextHandInfo()">Play</button>
             <span class="modal-close">X</span>

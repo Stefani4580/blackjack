@@ -128,12 +128,14 @@ class Dealer extends PlayerParent {
         cardImg.src = `${card.imageFilename}`;
         cardImg.height = 200;
         cardImg.width = 100;
+        cardImg.style = "display: none;";
+        cardImg.className = `${card.name}`;
 
         $(document).ready(function () {
             $(".playerCards").append(cardImg);
-            $(".playerCards").last().show(6000);
+            $(`.${card.name}`).show(500);
         });
-        // document.querySelector(".playerCards").appendChild(cardImg); 
+        // document.querySelector(".playerCards").appendChild(cardImgDiv); 
     }
 
     displayDealerCard(card){
@@ -141,8 +143,12 @@ class Dealer extends PlayerParent {
         cardImg.src = `${card.imageFilename}`;
         cardImg.height = 200;
         cardImg.width = 100;
+        cardImg.style = "display: none;";
+        cardImg.className = `${card.name}`;
+
         $(document).ready(function () {
             $(".dealerCards").append(cardImg);
+            $(`.${card.name}`).show(500);
         });
 
         // document.querySelector(".dealerCards").appendChild(cardImg); 
@@ -399,6 +405,11 @@ class Blackjack {
 // turnOverDealersHoleCard() - Turn over dealer's hole card.
 //==================================================================================================
     turnOverDealersHoleCard(){
+        // $(document).ready(function (){
+        //     // $("#holeCard").hide(200);
+        //     $("#holeCard").src = this.dealer.hand[0].imageFilename;
+        //     $("#holeCard").show(300);
+        // });
         document.getElementById("holeCard").src = this.dealer.hand[0].imageFilename;
     }
 

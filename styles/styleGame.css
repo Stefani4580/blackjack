@@ -1,17 +1,25 @@
 .container{
     display: grid;
-    background-color: darkorange;
+    background-color: bisque;
     height: 100vh;
     width: 100vw;
-    z-index: 1000;
-
-    grid-template-areas:    "title title"
-                            "dealer dealer"
-                            "player player"
-                            "controls controls"
-                            "status status";
+  
+    grid-template-areas:    "title"
+                            "dealer"
+                            "player"
+                            "controls"
+                            "status";
 }
 
+h1{
+  font-family: 'Monoton', cursive;
+  font-size: 4em;
+}
+
+h2{
+  font-family: 'Skranji', cursive;
+  font-size: 3em;
+}
 .mainTitle{
     grid-area: title;
     background-color: bisque;
@@ -24,10 +32,16 @@
     grid-area: dealer;
     border: black 3px;
     background-color: burlywood;
+    background-image: url("../assets/sheri-hooley-2ha8OG5bOmg-unsplash.jpg");
+    background-position:center;
+    background-size:cover;
+    background-repeat:no-repeat;
+   
+    /* opacity: 70%; */
     display: flex;
     flex-direction: row;
     align-content: space-between;
-    width: 100vw;
+    width: 100%;
 
 }
 
@@ -36,6 +50,7 @@
     top: 50%;
     width: 30vw;
     text-align: center;
+    padding: 3px;
     display: flex;
     flex-direction: column;
 }
@@ -43,6 +58,7 @@
 .dealerCards{
     border: black;
     width: 70vw;
+    padding: 3px;
     display: flex;
     flex-direction: row;
 }
@@ -51,9 +67,12 @@
     grid-area: player;
     border: black;
     background-color: goldenrod;
+    background-image: linear-gradient(goldenrod, gold
+    );
     display: flex;
     flex-direction: row;
     width: 100vw;
+    height: auto;
 }
 
 .playerText{
@@ -61,6 +80,8 @@
     width: 30vw;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .playerCards{
@@ -71,10 +92,10 @@
 .controls{
     grid-area: controls;
     border: black;
-    background-color: chocolate;
     display: flex;
     flex-direction: row;
     align-content: center;
+    justify-content: space-around;
 }
 
 .button{
@@ -82,11 +103,11 @@
     text-align: center;
 }
 
+
+
 .statusDiv{
     grid-area: status;
     text-align: center;
-    border: black 3px;
-    width: 100%;
 }
 
 /* Player Stats Table */
@@ -104,11 +125,8 @@ table.playerStats {
   table.playerStats tbody td {
     font-size: 13px;
   }
-  table.playerStats tr:nth-child(even) {
-    background: #F5C8BF;
-  }
   table.playerStats thead {
-    background: #A40808;
+    background: #cc5803;
   }
   table.playerStats thead th {
     font-size: 19px;
@@ -117,22 +135,9 @@ table.playerStats {
     text-align: center;
     border-left: 2px solid #A40808;
   }
-  table.playerStats thead th:first-child {
-    border-left: none;
-  }
   
-  table.playerStats tfoot td {
-    font-size: 13px;
-  }
-  table.playerStats tfoot .links {
-    text-align: right;
-  }
-  table.playerStats tfoot .links a{
-    display: inline-block;
-    background: #FFFFFF;
-    color: #A40808;
-    padding: 2px 8px;
-    border-radius: 5px;
+  table.playerStats td {
+    font-size: xx-large;
   }
 
   .newGameModal{
@@ -173,18 +178,18 @@ table.playerStats {
   
   .modal{
     position: relative;
-    background-color: white;
-    width: 30%;
-    height: 30%;
+    background-image: linear-gradient(#ffc971, #ff9505);
+    width: 70%;
+    height: 70%;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
   }
 
   .modal button{
     padding: 10px 30px;
-    background-color: #2980b9;
+    background-color: #e2711d;
     color: white;
     border: none;
     cursor: pointer;
