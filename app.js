@@ -219,7 +219,7 @@ class Blackjack {
     displayInitialPlayerStats(){
         document.getElementById("playerName").innerText = `${this.player.name}`;
         document.getElementById("bet").innerText = `$${this.player.bet}`;
-        document.getElementById("wallet").innerText = `$${this.player.wallet}`;
+        document.getElementById("wallet").innerText = `$${this.player.wallet.toFixed(2)}`;
         document.getElementById("score").innerText = 0;
     }
 
@@ -263,7 +263,7 @@ class Blackjack {
                 document.getElementById("statusText").innerText = `${this.player.name} lost!  Busted at ${this.player.calculateHand()}`;                
             }
             document.getElementById("bet").innerText = "$0";
-            document.getElementById("wallet").innerText = `$${this.player.wallet}`;    
+            document.getElementById("wallet").innerText = `$${this.player.wallet.toFixed(2)}`;    
         } else {
             document.getElementById("score").innerText = this.player.calculateHand();
         }
@@ -283,7 +283,7 @@ class Blackjack {
 
         // Display results
         document.getElementById("bet").innerText = "$0";
-        document.getElementById("wallet").innerText = `$${this.player.wallet}`;
+        document.getElementById("wallet").innerText = `$${this.player.wallet.toFixed(2)}`;
 
         // document.getElementById("nextHandButton").disabled = false;            
     }
@@ -335,7 +335,7 @@ class Blackjack {
 
 
             document.getElementById("bet").innerText = `$${this.player.bet}`;
-            document.getElementById("wallet").innerText = `$${this.player.wallet}`;
+            document.getElementById("wallet").innerText = `$${this.player.wallet.toFixed(2)}`;
             document.getElementById("hitButton").disabled = false;
             document.getElementById("stayButton").disabled = false;
             document.getElementById("nextHandButton").disabled = true;            
@@ -453,7 +453,7 @@ class Blackjack {
                     console.log(`==== Pay Player 1.5 ====`);
                     winnings = this.payWinnings(this.player, 1.5);
                 }
-                document.getElementById("statusText").innerText = `${this.player.name} won $${winnings}!`;
+                document.getElementById("statusText").innerText = `${this.player.name} won $${winnings.toFixed(2)}!`;
                 this.player.wallet += winnings;
                 document.getElementById("nextHandButton").disabled = false;            
                 break;
