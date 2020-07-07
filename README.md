@@ -21,9 +21,36 @@ The player receives 1.5 times the bet for a win and 2 times the bet for a natura
 
 The player can choose to stop the game.  The game ends if the player has no money.
 
+## Approach Taken
+Using Object Oriented Design, I identified the actors that became classes (e.g. Player, Dealer and Game).  Then I identified the actions that the actors would make (e.g. deal, count hand, hit, start game).  Those actions became methods of the classes.
+
+I pseudocoded my game using my wireframe to indicate APIs needed for communication with the UI.  Other classes were identified during pseudocoding.  I implemented and tested the code in phases starting with the deck of cards.
+
+I implemented my game to work in the console prior to implementing the UI.  After I had a working game, I implemented the UI using vanilla CSS.
+
+Once I had a working game (HTML, CSS, JS), I investigated jQuery to add animation.  I used jQuery to animate the cards as they were dealt and revealed.
+
+## File Structure
+- blackjack
+    - assets
+        - cards
+    - pages
+    - styles
+
+## Installation
+The game starts by opening the index.html page.
+
+
+## Blackjack 2.0
+I would like to improve the UI with more animation and other modern UI techniques.
 
 ## Resources
 Card Images
 : Downloaded from American Contract Bridge League (ACBL) http://acbl.mybigcommerce.com/52-playing-cards/
+
 Images
 : Downloaded from unsplash https://unsplash.com/photos/gqCYRe2ml6k jt-gqCYRe2ml6k-unsplash.jpg
+: Downloaded from unsplash https://unsplash.com/photos/o4lI2gKdrrA
+
+jQuery
+: https://www.tutorialspoint.com/jquery/index.htm
